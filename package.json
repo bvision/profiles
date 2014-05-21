@@ -63,6 +63,7 @@
     "grunt-nodemon": "0.2.0",
     "karma": "^0.10.4",
     "karma-coverage": "^0.1.0",
+    "karma-junit-reporter": "~0.1",
     "load-grunt-tasks": "^0.4.0",
     "should": "2.1.1",
     "supertest": "0.8.2",
