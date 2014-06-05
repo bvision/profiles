@@ -16,6 +16,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'public/system/lib/jquery/dist/jquery.js',
             'public/system/lib/angular/angular.js',
             'public/system/lib/angular-mocks/angular-mocks.js',
             'public/system/lib/angular-cookies/angular-cookies.js',
@@ -23,6 +24,7 @@ module.exports = function(config) {
             'public/system/lib/angular-ui-router/release/angular-ui-router.js',
             'public/system/lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'public/system/lib/angular-bootstrap/ui-bootstrap.js',
+	    'public/system/lib/ng-grid/ng-grid-2.0.11.debug.js',
             'public/*/*.js',
             'public/{auth,employees}/*/*.js',
             'public/system/{controllers,routes,services}/*.js',

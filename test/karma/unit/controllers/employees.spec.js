@@ -115,7 +115,7 @@
 
                     // fixture mock form input values
                     scope.title = 'An Employee from MEAN';
-                    scope.file: 1
+                    scope.file = 1;
 
                     // test post request is sent
                     $httpBackend.expectPOST('employees', postEmployeeData()).respond(responseEmployeeData());
@@ -132,7 +132,7 @@
                     expect($location.path()).toBe('/employees/' + responseEmployeeData()._id);
                 });
 
-            it('$scope.update() should update a valid employee', inject(function(Employees) {
+            it('$scope.update() should update a valid employee', inject(function(Employee) {
 
                 // fixture rideshare
                 var putEmployeeData = function() {
@@ -144,7 +144,7 @@
                 };
 
                 // mock employee object from form
-                var employee = new Employees(putEmployeeData());
+                var employee = new Employee(putEmployeeData());
 
                 // mock employee in scope
                 scope.employee = employee;
@@ -170,10 +170,10 @@
             }));
 
             it('$scope.remove() should send a DELETE request with a valid employeeId' +
-                'and remove the employee from the scope', inject(function(Employees) {
+                'and remove the employee from the scope', inject(function(Employee) {
 
                     // fixture rideshare
-                    var employee = new Employees({
+                    var employee = new Employee({
                         _id: '525a8422f6d0f87f0e407a33'
                     });
 

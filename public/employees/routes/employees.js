@@ -1,7 +1,7 @@
 'use strict';
 
 //Setting up route
-angular.module('mean.employee').config(['$stateProvider', '$urlRouterProvider',
+angular.module('mean.employees').config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
         //================================================
@@ -61,29 +61,29 @@ angular.module('mean.employee').config(['$stateProvider', '$urlRouterProvider',
         // states for my app
         $stateProvider
             .state('all employees', {
-                url: '/employee',
-                templateUrl: 'public/employee/views/list.html',
+                url: '/employees',
+                templateUrl: 'public/employees/views/list.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
             .state('create employee', {
-                url: '/employee/create',
-                templateUrl: 'public/employee/views/create.html',
+                url: '/employees/create',
+                templateUrl: 'public/employees/views/create.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
-            .state('edit employee', {
-                url: '/employee/:employeeId/edit',
-                templateUrl: 'public/employee/views/edit.html',
+            .state('edit employees', {
+                url: '/employees/:employeeId/edit',
+                templateUrl: 'public/employees/views/edit.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
             .state('employee by id', {
-                url: '/employee/:employeeId',
-                templateUrl: 'public/employee/views/view.html',
+                url: '/employees/:employeeId',
+                templateUrl: 'public/employees/views/view.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }

@@ -1,17 +1,19 @@
 'use strict';
 
-angular.module('mean.employee').controller('EmployeeController', ['$scope', '$stateParams', '$location', 'Global', 'Employee', function ($scope, $stateParams, $location, Global, Employee) {
+angular.module('mean.employees').controller('EmployeesController', ['$scope', '$stateParams', '$location', 'Global', 'Employee', function ($scope, $stateParams, $location, Global, Employee) {
     $scope.global = Global;
 
     $scope.create = function() {
         var employee = new Employee({
-            title: this.title
+            title: this.title,
+	    file: this.file
         });
         employee.$save(function(response) {
-            $location.path('employee/' + response._id);
+            $location.path('employees/' + response._id);
         });
 
         this.title = '';
+        this.file = '';
     };
 
     $scope.remove = function(employee) {
@@ -26,7 +28,7 @@ angular.module('mean.employee').controller('EmployeeController', ['$scope', '$st
         }
         else {
             $scope.employee.$remove();
-            $location.path('employee');
+            $location.path('employees');
         }
     };
 
@@ -38,7 +40,7 @@ angular.module('mean.employee').controller('EmployeeController', ['$scope', '$st
         employee.updated.push(new Date().getTime());
 
         employee.$update(function() {
-            $location.path('employee/' + employee._id);
+            $location.path('employees/' + employee._id);
         });
     };
 
@@ -46,6 +48,7 @@ angular.module('mean.employee').controller('EmployeeController', ['$scope', '$st
         Employee.query(function(employees) {
             $scope.employees = employees;
         });
+	$scope.employeesData = {data: 'employees'};
     };
 
     $scope.findOne = function() {
