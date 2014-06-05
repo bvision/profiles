@@ -1,9 +1,9 @@
 'use strict';
 
 (function() {
-    // Articles Controller Spec
+    // Employees Controller Spec
     describe('MEAN controllers', function() {
-        describe('ArticlesController', function() {
+        describe('EmployeesController', function() {
             // The $resource service augments the response object with methods for updating and deleting the resource.
             // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
             // the responses exactly. To solve the problem, we use a newly-defined toEqualData Jasmine matcher.
@@ -21,7 +21,7 @@
             beforeEach(module('mean'));
 
             // Initialize the controller and a mock scope
-            var ArticlesController,
+            var EmployeesController,
                 scope,
                 $httpBackend,
                 $stateParams,
@@ -34,7 +34,7 @@
 
                 scope = $rootScope.$new();
 
-                ArticlesController = $controller('ArticlesController', {
+                EmployeesController = $controller('EmployeesController', {
                     $scope: scope
                 });
 
@@ -46,13 +46,13 @@
 
             }));
 
-            it('$scope.find() should create an array with at least one article object ' +
+            it('$scope.find() should create an array with at least one employee object ' +
                 'fetched from XHR', function() {
 
                     // test expected GET request
-                    $httpBackend.expectGET('articles').respond([{
-                        title: 'An Article about MEAN',
-                        content: 'MEAN rocks!'
+                    $httpBackend.expectGET('employees').respond([{
+                        title: 'An Employee from MEAN',
+                        file: 1
                     }]);
 
                     // run controller
@@ -60,35 +60,35 @@
                     $httpBackend.flush();
 
                     // test scope value
-                    expect(scope.articles).toEqualData([{
-                        title: 'An Article about MEAN',
-                        content: 'MEAN rocks!'
+                    expect(scope.employees).toEqualData([{
+                        title: 'An Employee from MEAN',
+                        file: 1
                     }]);
 
                 });
 
-            it('$scope.findOne() should create an array with one article object fetched ' +
-                'from XHR using a articleId URL parameter', function() {
+            it('$scope.findOne() should create an array with one employee object fetched ' +
+                'from XHR using a employeeId URL parameter', function() {
                     // fixture URL parament
-                    $stateParams.articleId = '525a8422f6d0f87f0e407a33';
+                    $stateParams.employeeId = '525a8422f6d0f87f0e407a33';
 
                     // fixture response object
-                    var testArticleData = function() {
+                    var testEmployeeData = function() {
                         return {
-                            title: 'An Article about MEAN',
-                            content: 'MEAN rocks!'
+                            title: 'An Employee from MEAN',
+                            file: 1
                         };
                     };
 
                     // test expected GET request with response object
-                    $httpBackend.expectGET(/articles\/([0-9a-fA-F]{24})$/).respond(testArticleData());
+                    $httpBackend.expectGET(/employees\/([0-9a-fA-F]{24})$/).respond(testEmployeeData());
 
                     // run controller
                     scope.findOne();
                     $httpBackend.flush();
 
                     // test scope value
-                    expect(scope.article).toEqualData(testArticleData());
+                    expect(scope.employee).toEqualData(testEmployeeData());
 
                 });
 
@@ -97,28 +97,28 @@
                 'locate to new object URL', function() {
 
                     // fixture expected POST data
-                    var postArticleData = function() {
+                    var postEmployeeData = function() {
                         return {
-                            title: 'An Article about MEAN',
-                            content: 'MEAN rocks!'
+                            title: 'An Employee from MEAN',
+                            file: 1
                         };
                     };
 
                     // fixture expected response data
-                    var responseArticleData = function() {
+                    var responseEmployeeData = function() {
                         return {
                             _id: '525cf20451979dea2c000001',
-                            title: 'An Article about MEAN',
-                            content: 'MEAN rocks!'
+                            title: 'An Employee from MEAN',
+                            file: 1
                         };
                     };
 
                     // fixture mock form input values
-                    scope.title = 'An Article about MEAN';
-                    scope.content = 'MEAN rocks!';
+                    scope.title = 'An Employee from MEAN';
+                    scope.file: 1
 
                     // test post request is sent
-                    $httpBackend.expectPOST('articles', postArticleData()).respond(responseArticleData());
+                    $httpBackend.expectPOST('employees', postEmployeeData()).respond(responseEmployeeData());
 
                     // Run controller
                     scope.create();
@@ -126,38 +126,38 @@
 
                     // test form input(s) are reset
                     expect(scope.title).toEqual('');
-                    expect(scope.content).toEqual('');
+                    expect(scope.file).toEqual('');
 
                     // test URL location to new object
-                    expect($location.path()).toBe('/articles/' + responseArticleData()._id);
+                    expect($location.path()).toBe('/employees/' + responseEmployeeData()._id);
                 });
 
-            it('$scope.update() should update a valid article', inject(function(Articles) {
+            it('$scope.update() should update a valid employee', inject(function(Employees) {
 
                 // fixture rideshare
-                var putArticleData = function() {
+                var putEmployeeData = function() {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
-                        title: 'An Article about MEAN',
+                        title: 'An Employee from MEAN',
                         to: 'MEAN is great!'
                     };
                 };
 
-                // mock article object from form
-                var article = new Articles(putArticleData());
+                // mock employee object from form
+                var employee = new Employees(putEmployeeData());
 
-                // mock article in scope
-                scope.article = article;
+                // mock employee in scope
+                scope.employee = employee;
 
                 // test PUT happens correctly
-                $httpBackend.expectPUT(/articles\/([0-9a-fA-F]{24})$/).respond();
+                $httpBackend.expectPUT(/employees\/([0-9a-fA-F]{24})$/).respond();
 
                 // testing the body data is out for now until an idea for testing the dynamic updated array value is figured out
-                //$httpBackend.expectPUT(/articles\/([0-9a-fA-F]{24})$/, putArticleData()).respond();
+                //$httpBackend.expectPUT(/employees\/([0-9a-fA-F]{24})$/, putEmployeeData()).respond();
                 /*
-                Error: Expected PUT /articles\/([0-9a-fA-F]{24})$/ with different data
-                EXPECTED: {"_id":"525a8422f6d0f87f0e407a33","title":"An Article about MEAN","to":"MEAN is great!"}
-                GOT:      {"_id":"525a8422f6d0f87f0e407a33","title":"An Article about MEAN","to":"MEAN is great!","updated":[1383534772975]}
+                Error: Expected PUT /employees\/([0-9a-fA-F]{24})$/ with different data
+                EXPECTED: {"_id":"525a8422f6d0f87f0e407a33","title":"An Employee from MEAN","to":"MEAN is great!"}
+                GOT:      {"_id":"525a8422f6d0f87f0e407a33","title":"An Employee from MEAN","to":"MEAN is great!","updated":[1383534772975]}
                 */
 
                 // run controller
@@ -165,32 +165,32 @@
                 $httpBackend.flush();
 
                 // test URL location to new object
-                expect($location.path()).toBe('/articles/' + putArticleData()._id);
+                expect($location.path()).toBe('/employees/' + putEmployeeData()._id);
 
             }));
 
-            it('$scope.remove() should send a DELETE request with a valid articleId' +
-                'and remove the article from the scope', inject(function(Articles) {
+            it('$scope.remove() should send a DELETE request with a valid employeeId' +
+                'and remove the employee from the scope', inject(function(Employees) {
 
                     // fixture rideshare
-                    var article = new Articles({
+                    var employee = new Employees({
                         _id: '525a8422f6d0f87f0e407a33'
                     });
 
                     // mock rideshares in scope
-                    scope.articles = [];
-                    scope.articles.push(article);
+                    scope.employees = [];
+                    scope.employees.push(employee);
 
                     // test expected rideshare DELETE request
-                    $httpBackend.expectDELETE(/articles\/([0-9a-fA-F]{24})$/).respond(204);
+                    $httpBackend.expectDELETE(/employees\/([0-9a-fA-F]{24})$/).respond(204);
 
                     // run controller
-                    scope.remove(article);
+                    scope.remove(employee);
                     $httpBackend.flush();
 
-                    // test after successful delete URL location articles lis
-                    //expect($location.path()).toBe('/articles');
-                    expect(scope.articles.length).toBe(0);
+                    // test after successful delete URL location employees lis
+                    //expect($location.path()).toBe('/employees');
+                    expect(scope.employees.length).toBe(0);
 
                 }));
         });
