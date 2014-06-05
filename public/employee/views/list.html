@@ -1,10 +1,18 @@
 <section data-ng-controller="EmployeeController" data-ng-init="find()">
-	<ul class="employee unstyled">
-		<li data-ng-repeat="employee in employees">
-			<span>{{employee.created | date:'medium'}}</span> /
-			<span>{{employee.user.name}}</span>
-			<h2><a data-ng-href="#!/employee/{{employee._id}}">{{employee.title}}</a></h2>
-		</li>
-	</ul>
-	<h1 data-ng-hide="!employees || employees.length">No employee yet. <br> Why don't you <a href="/#!/employee/create">Create One</a>?</h1>
+
+        <table ng-table="tableParams" class="table">
+            <tr ng-repeat="employee in employees">
+	        <td><a data-ng-href="#!/employee/{{employee._id}}"><i class="glyphicon glyphicon-file"></i></a></td>
+                <td data-title="'File'">{{employee.file}}</td>
+                <td data-title="'Start date'">{{employee.start_date | date:'medium'}}</td>
+                <td data-title="'Name'">{{employee.user.name}}</td>
+                <td data-title="'Email'">{{employee.email}}</td>
+                <td data-title="'Title'">{{employee.title}}</td>
+                <td data-title="'Assigned to'"><span ng-repeat="a in employee.asigned_to">{{a}}<span ng-if="!$last">,&npsp;</span></span></td>
+                <td data-title="'Technologies'"><span ng-repeat="t in employee.technologies">{{t}}<span ng-if="!$last">,&npsp;</span></span></td>
+                <td data-title="'Belongs to'">{{employee.belongs.user.name}}</td>
+            </tr>
+        </table>
+
+	<h1 data-ng-if="employees == undefined || employees.length == 0">No employee yet. <br> Why don't you <a href="/#!/employee/create">Create One</a>?</h1>
 </section>
