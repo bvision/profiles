@@ -47,8 +47,19 @@ angular.module('mean.employees').controller('EmployeesController', ['$scope', '$
     $scope.find = function() {
         Employee.query(function(employees) {
             $scope.employees = employees;
+	    $scope.employeesData = [];
+	    $scope.employees.forEach(function(emp) {
+	        $scope.employeesData.push({
+		    'File': emp.file,
+		    'StartDate': emp.start_date,
+		    'Name': emp.user.name,
+		    'Email': emp.email,
+		    'Title': emp.title,
+		    'BelongsTo': emp.belongs ? emp.belongs.user.name : ''
+		});
+	    });
         });
-	$scope.employeesData = {data: 'employees'};
+	$scope.employeesOptions = {data: 'employeesData'};
     };
 
     $scope.findOne = function() {
