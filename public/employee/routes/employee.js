@@ -1,7 +1,7 @@
 'use strict';
 
 //Setting up route
-angular.module('mean.articles').config(['$stateProvider', '$urlRouterProvider',
+angular.module('mean.employee').config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
         //================================================
@@ -60,30 +60,30 @@ angular.module('mean.articles').config(['$stateProvider', '$urlRouterProvider',
 
         // states for my app
         $stateProvider
-            .state('all articles', {
-                url: '/articles',
-                templateUrl: 'public/articles/views/list.html',
+            .state('all employee', {
+                url: '/employee',
+                templateUrl: 'public/employee/views/list.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
-            .state('create article', {
-                url: '/articles/create',
-                templateUrl: 'public/articles/views/create.html',
+            .state('create employee', {
+                url: '/employee/create',
+                templateUrl: 'public/employee/views/create.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
-            .state('edit article', {
-                url: '/articles/:articleId/edit',
-                templateUrl: 'public/articles/views/edit.html',
+            .state('edit employee', {
+                url: '/employee/:employeeId/edit',
+                templateUrl: 'public/employee/views/edit.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
-            .state('article by id', {
-                url: '/articles/:articleId',
-                templateUrl: 'public/articles/views/view.html',
+            .state('employee by id', {
+                url: '/employee/:employeeId',
+                templateUrl: 'public/employee/views/view.html',
                 resolve: {
                     loggedin: checkLoggedin
                 }

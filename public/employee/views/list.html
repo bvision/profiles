@@ -1,0 +1,10 @@
+<section data-ng-controller="EmployeeController" data-ng-init="find()">
+	<ul class="employee unstyled">
+		<li data-ng-repeat="employee in employees">
+			<span>{{employee.created | date:'medium'}}</span> /
+			<span>{{employee.user.name}}</span>
+			<h2><a data-ng-href="#!/employee/{{employee._id}}">{{employee.title}}</a></h2>
+		</li>
+	</ul>
+	<h1 data-ng-hide="!employees || employees.length">No employee yet. <br> Why don't you <a href="/#!/employee/create">Create One</a>?</h1>
+</section>
