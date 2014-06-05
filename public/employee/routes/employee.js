@@ -60,7 +60,7 @@ angular.module('mean.employee').config(['$stateProvider', '$urlRouterProvider',
 
         // states for my app
         $stateProvider
-            .state('all employee', {
+            .state('all employees', {
                 url: '/employee',
                 templateUrl: 'public/employee/views/list.html',
                 resolve: {
