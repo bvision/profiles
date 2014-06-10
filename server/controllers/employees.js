@@ -29,7 +29,7 @@ exports.create = function(req, res) {
 
     employee.save(function(err) {
         if (err) {
-            return res.send('users/signup', {
+            return res.send('employee/error', {
                 errors: err.errors,
                 employee: employee
             });
@@ -49,7 +49,7 @@ exports.update = function(req, res) {
 
     employee.save(function(err) {
         if (err) {
-            return res.send('users/signup', {
+            return res.send('employee/error', {
                 errors: err.errors,
                 employee: employee
             });
@@ -67,7 +67,7 @@ exports.destroy = function(req, res) {
 
     employee.remove(function(err) {
         if (err) {
-            return res.send('users/signup', {
+            return res.send('employee/error', {
                 errors: err.errors,
                 employee: employee
             });

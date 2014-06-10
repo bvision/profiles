@@ -132,7 +132,7 @@
                     expect($location.path()).toBe('/employees/' + responseEmployeeData()._id);
                 });
 
-            it('$scope.update() should update a valid employee', inject(function(Employee) {
+            it('$scope.update() should update a valid employee', inject(function(Employees) {
 
                 // fixture rideshare
                 var putEmployeeData = function() {
@@ -144,7 +144,7 @@
                 };
 
                 // mock employee object from form
-                var employee = new Employee(putEmployeeData());
+                var employee = new Employees(putEmployeeData());
 
                 // mock employee in scope
                 scope.employee = employee;
@@ -170,10 +170,10 @@
             }));
 
             it('$scope.remove() should send a DELETE request with a valid employeeId' +
-                'and remove the employee from the scope', inject(function(Employee) {
+                'and remove the employee from the scope', inject(function(Employees) {
 
                     // fixture rideshare
-                    var employee = new Employee({
+                    var employee = new Employees({
                         _id: '525a8422f6d0f87f0e407a33'
                     });
 

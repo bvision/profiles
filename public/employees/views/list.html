@@ -1,11 +1,12 @@
 <section data-ng-controller="EmployeesController" data-ng-init="find()">
 
-        <div class="gridStyle" ng-grid="employeesOptions"></div>
-
 <!--
+        <div class="gridStyle" ng-grid="employeesOptions"></div>
+-->
+
         <table ng-table="tableParams" class="table">
             <tr ng-repeat="employee in employees">
-	        <td><a data-ng-href="#!/employee/{{employee._id}}"><i class="glyphicon glyphicon-file"></i></a></td>
+	        <td><a data-ng-href="#!/employees/{{employee._id}}"><i class="glyphicon glyphicon-file"></i></a></td>
                 <td data-title="'File'">{{employee.file}}</td>
                 <td data-title="'Start date'">{{employee.start_date | date:'medium'}}</td>
                 <td data-title="'Name'">{{employee.user.name}}</td>
@@ -16,7 +17,6 @@
                 <td data-title="'Belongs to'">{{employee.belongs.user.name}}</td>
             </tr>
         </table>
--->
 
 	<h1 data-ng-if="employees == undefined || employees.length == 0">No employee yet. <br> Why don't you <a href="/#!/employee/create">Create One</a>?</h1>
 </section>

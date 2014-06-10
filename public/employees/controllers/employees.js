@@ -1,19 +1,32 @@
 'use strict';
 
-angular.module('mean.employees').controller('EmployeesController', ['$scope', '$stateParams', '$location', 'Global', 'Employee', function ($scope, $stateParams, $location, Global, Employee) {
+angular.module('mean.employees').controller('EmployeesController', ['$scope', '$stateParams', '$location', 'Global', 'Employees', function ($scope, $stateParams, $location, Global, Employees) {
     $scope.global = Global;
 
     $scope.create = function() {
-        var employee = new Employee({
-            title: this.title,
-	    file: this.file
+ 
+       var employee = new Employees({
+	   file: this.file,
+	   email: this.email,
+	   start_date: this.start_date,
+           title: this.title,
+	   assigned_to: this.assigned_to,
+	   technologies: this.technologies,
+	   belongs: this.belongs
         });
         employee.$save(function(response) {
-            $location.path('employees/' + response._id);
+	    if (!response.errors && response._id) {
+                $location.path('employees/' + response._id);
+	    }
         });
 
-        this.title = '';
         this.file = '';
+        this.email = '';
+        this.start_date = '';
+        this.title = '';
+        this.assigned_to = '';
+        this.technologies = '';
+        this.belongs = '';
     };
 
     $scope.remove = function(employee) {
@@ -45,14 +58,14 @@ angular.module('mean.employees').controller('EmployeesController', ['$scope', '$
     };
 
     $scope.find = function() {
-        Employee.query(function(employees) {
+        Employees.query(function(employees) {
             $scope.employees = employees;
 	    $scope.employeesData = [];
 	    $scope.employees.forEach(function(emp) {
 	        $scope.employeesData.push({
 		    'File': emp.file,
 		    'StartDate': emp.start_date,
-		    'Name': emp.user.name,
+		    'Name': emp.user ? emp.user.name : '',
 		    'Email': emp.email,
 		    'Title': emp.title,
 		    'BelongsTo': emp.belongs ? emp.belongs.user.name : ''
@@ -63,7 +76,7 @@ angular.module('mean.employees').controller('EmployeesController', ['$scope', '$
     };
 
     $scope.findOne = function() {
-        Employee.get({
+        Employees.get({
             employeeId: $stateParams.employeeId
         }, function(employee) {
             $scope.employee = employee;
